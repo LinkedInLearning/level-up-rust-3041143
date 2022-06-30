@@ -1,0 +1,7 @@
+[package]
+name = "hello_remote_world"
+version = "0.1.0"
+authors = ["Walt Ritscher <waltritscher@linkedin.com>"]
+
+[lib]
+path ="./src/lib/lib.rs"
