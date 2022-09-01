@@ -1,41 +1,20 @@
-fn median(a: Vec<f32>) -> Option<f32> {
-    todo!();
+fn sort_usernames<T: AsRef<str>>(usernames: &mut Vec<T>) {
+    usernames.sort_by_cached_key(|x| x.as_ref().to_lowercase());
 }
 
 fn main() {
-    let answer = median(vec![1.0, 2.0, 5.0]);
+    let mut users = vec!["Todd", "Amy", "mike99", "Jennifer", "alison"];
 
-    println!("median([1,2,5]) = {:?}", answer);
+    println!("unsorted: {:?}", &users);
+    sort_usernames(&mut users);
+    println!("sorted:   {:?}", &users);
 }
 
 #[test]
-fn empty_list() {
-    let input = vec![];
-    let expected_output = None;
-    let actual_output = median(input);
-    assert_eq!(actual_output, expected_output);
-}
+fn five_users() {
+    let mut users = vec!["Todd", "Amy", "mike99", "Jennifer", "alison"];
+    let sorted = vec!["alison", "Amy", "Jennifer", "mike99", "Todd"];
+    sort_usernames(&mut users);
 
-#[test]
-fn sorted_list() {
-    let input = vec![1.0, 4.0, 5.0];
-    let expected_output = Some(4.0);
-    let actual_output = median(input);
-    assert_eq!(actual_output, expected_output);
-}
-
-#[test]
-fn even_length() {
-    let input = vec![1.0, 3.0, 5.0, 6.0];
-    let expected_output = Some(4.0);
-    let actual_output = median(input);
-    assert_eq!(actual_output, expected_output);
-}
-
-#[test]
-fn unsorted_list() {
-    let input = vec![1.0, 5.0, 2.0];
-    let expected_output = Some(2.0);
-    let actual_output = median(input);
-    assert_eq!(actual_output, expected_output);
+    assert_eq!(users, sorted);
 }
