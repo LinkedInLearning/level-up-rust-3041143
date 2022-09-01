@@ -1,41 +1,52 @@
-fn median(a: Vec<f32>) -> Option<f32> {
-    todo!();
+use std::path;
+
+trait FileMetadata {
+    fn exists(&self) -> bool;
+
+    fn is_writeable(&self) -> bool;
+
+    fn is_readable(&self) -> bool;
+}
+
+impl FileMetadata for path::Path {
+    fn is_readable(&self) -> bool {
+        todo!();
+    }
+
+    fn is_writeable(&self) -> bool {
+        todo!();
+    }
+
+    fn exists(&self) -> bool {
+        todo!();
+    }
 }
 
 fn main() {
-    let answer = median(vec![1.0, 2.0, 5.0]);
-
-    println!("median([1,2,5]) = {:?}", answer);
+    // 
 }
 
 #[test]
-fn empty_list() {
-    let input = vec![];
-    let expected_output = None;
-    let actual_output = median(input);
-    assert_eq!(actual_output, expected_output);
+fn writeable() {
+    use std::fs;
+    use tempfile;
+
+    let f = tempfile::NamedTempFile::new().unwrap();
+    assert!(f.path().is_writeable());
+
+    fs::remove_file(f.path()).unwrap();
 }
 
 #[test]
-fn sorted_list() {
-    let input = vec![1.0, 4.0, 5.0];
-    let expected_output = Some(4.0);
-    let actual_output = median(input);
-    assert_eq!(actual_output, expected_output);
-}
+fn read_only() {
+    use std::fs;
+    use tempfile;
 
-#[test]
-fn even_length() {
-    let input = vec![1.0, 3.0, 5.0, 6.0];
-    let expected_output = Some(4.0);
-    let actual_output = median(input);
-    assert_eq!(actual_output, expected_output);
-}
+    let f = tempfile::NamedTempFile::new().unwrap();
+    let mut perms = fs::metadata(f.path()).unwrap().permissions();
+    perms.set_readonly(true);
+    fs::set_permissions(f.path(), perms).unwrap();
+    assert_eq!(f.path().is_writeable(), false);
 
-#[test]
-fn unsorted_list() {
-    let input = vec![1.0, 5.0, 2.0];
-    let expected_output = Some(2.0);
-    let actual_output = median(input);
-    assert_eq!(actual_output, expected_output);
+    fs::remove_file(f.path()).unwrap();
 }
