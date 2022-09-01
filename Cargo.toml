@@ -1,7 +1,6 @@
 [package]
-name = "rust-code-challenge-9"
+name = "rust-code-challenge-10"
 version = "0.0.0"
 edition = "2018"
 
 [dependencies]
-

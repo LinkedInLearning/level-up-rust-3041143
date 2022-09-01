@@ -1,9 +1,9 @@
-# Rust Code Challenges: Challenge 9
+# Level Up Rust: Challenge 10
 
-Your challenge is to implement a function that can sum lists of integers
-that include missing values. This may occur during parsing user input,
-for example when extracting values from CSV files.
-
+Your challenge is to implement a function that
+can sum `Vec<Option<i32>>`. In words, this means
+that your function needs to be able to handle
+missing values.
 
 ## Testing your solution
 
