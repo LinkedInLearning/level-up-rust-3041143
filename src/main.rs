@@ -1,41 +1,73 @@
-fn median(a: Vec<f32>) -> Option<f32> {
-    todo!();
+use std::fmt::Display;
+use std::str::FromStr;
+
+#[derive(Debug, PartialEq)]
+struct Rgb; // TODO: design data structure
+
+trait RgbChannels {
+    fn r(&self) -> u8;
+
+    fn g(&self) -> u8;
+
+    fn b(&self) -> u8;
+}
+
+impl RgbChannels for Rgb {
+    // TODO: implement trait
+}
+
+impl FromStr for Rgb {
+    // TODO: implement trait
+}
+
+impl Display for Rgb {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "#{:02x}{:02x}{:02x}", self.r(), self.g(), self.b())
+    }
 }
 
 fn main() {
-    let answer = median(vec![1.0, 2.0, 5.0]);
-
-    println!("median([1,2,5]) = {:?}", answer);
+    // 
 }
 
 #[test]
-fn empty_list() {
-    let input = vec![];
-    let expected_output = None;
-    let actual_output = median(input);
-    assert_eq!(actual_output, expected_output);
+fn every_color() {
+    let colors = (0_u8..255).zip(0_u8..255).zip(0_u8..255);
+
+    for ((r, g), b) in colors {
+        let hex = format!("#{:02x}{:02x}{:02x}", r, g, b);
+        let color: Rgb = hex.parse().unwrap();
+        assert_eq!(hex, format!("{}", color));
+    }
 }
 
 #[test]
-fn sorted_list() {
-    let input = vec![1.0, 4.0, 5.0];
-    let expected_output = Some(4.0);
-    let actual_output = median(input);
-    assert_eq!(actual_output, expected_output);
+#[should_panic]
+fn too_short () {
+    let _: Rgb = "1234".parse().unwrap();
 }
 
 #[test]
-fn even_length() {
-    let input = vec![1.0, 3.0, 5.0, 6.0];
-    let expected_output = Some(4.0);
-    let actual_output = median(input);
-    assert_eq!(actual_output, expected_output);
+#[should_panic]
+fn not_a_hex_code () {
+    let _: Rgb = "?".parse().unwrap();
 }
 
 #[test]
-fn unsorted_list() {
-    let input = vec![1.0, 5.0, 2.0];
-    let expected_output = Some(2.0);
-    let actual_output = median(input);
-    assert_eq!(actual_output, expected_output);
+#[should_panic]
+fn invalid_literals () {
+    let _: Rgb = "?".parse().unwrap();
 }
+
+#[test]
+#[should_panic]
+fn no_leading_hash() {
+    let _: Rgb = "aabbcc".parse().unwrap();
+}
+
+#[test]
+#[should_panic]
+fn out_of_bounds() {
+    let _: Rgb = "00gg00".parse().unwrap();
+}
+
