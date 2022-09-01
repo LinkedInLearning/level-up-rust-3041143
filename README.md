@@ -1,15 +1,15 @@
-# Rust Code Challenges: Challenge 5
+# Level Up Rust: Challenge 5
 
 Your challenge is to implement a trait, `MorseCode` for `String`.
-The `MorseCode` trait contains a method `to_morse_code()` that 
+The `MorseCode` trait contains a method `to_morse_code()` that
 returns a `Message`.
 
 The `Message` type is defined within the sample code. It is a
 type alias for `Vec<Letter>`, where `Letter` represents a single
 character from the Morse code alphabet (A-Z, 0-9).
 
-As a refresher on Morse code, individual characters are made up 
-of short bursts of "pulses", which can either be short (`.`) or 
+As a refresher on Morse code, individual characters are made up
+of short bursts of "pulses", which can either be short (`.`) or
 long (`_`).
 
 Here are a few characters from the alphabet and their Morse code
@@ -17,7 +17,7 @@ equivalents:
 
 <table>
   <tr><td>A</td><td><code> _. </code></td></tr>
-  <tr><td>B</td><td><code> _... </code></td></tr>
+<tr><td>B</td><td><code>_... </code></td></tr>
   <tr><td>C</td><td><code> _._. </code></td></tr>
   <tr><td colspan=2>...</td></tr>
   <tr><td>X</td><td><code> _.._ </code></td></tr>
@@ -50,7 +50,7 @@ defined as:
 type Message = Vec<Letter>;
 ```
 
-It is a 
+It is a
 type alias for the `Vec<
 
 ## Testing your code
