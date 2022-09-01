@@ -1,41 +1,67 @@
-fn median(a: Vec<f32>) -> Option<f32> {
-    todo!();
+#![allow(unused)]
+
+enum Scale {
+    Celsius,
+    Fahrenheit,
+}
+
+struct Temperature {
+    degrees: f32,
+    scale: Scale,
+}
+
+impl Temperature {
+    fn new(degrees: f32) -> Self {
+        Temperature {
+            degrees,
+            scale: Scale::Celsius,
+        }
+    }
+
+    fn to_celsius(&self) -> f32 {
+        match self.scale {
+            Scale::Celsius => self.degrees,
+            Scale::Fahrenheit => (self.degrees - 32.0) * (5.0 / 9.0),
+        }
+    }
+
+    fn to_fahrenheit(&self) -> f32 {
+        match self.scale {
+            Scale::Celsius => ((9.0 / 5.0) * self.degrees) + 32.0,
+            Scale::Fahrenheit => self.degrees,
+        }
+    }
 }
 
 fn main() {
-    let answer = median(vec![1.0, 2.0, 5.0]);
+    let temp = Temperature::new(20.0);
 
-    println!("median([1,2,5]) = {:?}", answer);
+    println!("fun fact: 20°C is an integer in celsius and fahrenheit");
+    println!("          {:.1}°C = {:.1}°F", temp.to_celsius(), temp.to_fahrenheit());
 }
 
 #[test]
-fn empty_list() {
-    let input = vec![];
-    let expected_output = None;
-    let actual_output = median(input);
-    assert_eq!(actual_output, expected_output);
+fn one_degree() {
+    let cold = Temperature::new(1.0);
+    assert!((cold.to_fahrenheit() - 33.8) < 0.01);
+    assert!((cold.to_fahrenheit() - 33.8) >= 0.0);
 }
 
 #[test]
-fn sorted_list() {
-    let input = vec![1.0, 4.0, 5.0];
-    let expected_output = Some(4.0);
-    let actual_output = median(input);
-    assert_eq!(actual_output, expected_output);
+fn boiling() {
+    let hot = Temperature::new(100.0);
+    assert!((hot.to_fahrenheit() - 212.0) < 0.01);
+    assert!((hot.to_fahrenheit() - 212.0) >= 0.0);
 }
 
 #[test]
-fn even_length() {
-    let input = vec![1.0, 3.0, 5.0, 6.0];
-    let expected_output = Some(4.0);
-    let actual_output = median(input);
-    assert_eq!(actual_output, expected_output);
+fn freezing() {
+    let freezing = Temperature {
+        degrees: Temperature::new(0.0).to_fahrenheit(),
+        scale: Scale::Fahrenheit,
+    };
+
+    assert!(freezing.to_celsius() < 0.001);
+    assert!(freezing.to_celsius() > -0.01);
 }
 
-#[test]
-fn unsorted_list() {
-    let input = vec![1.0, 5.0, 2.0];
-    let expected_output = Some(2.0);
-    let actual_output = median(input);
-    assert_eq!(actual_output, expected_output);
-}
