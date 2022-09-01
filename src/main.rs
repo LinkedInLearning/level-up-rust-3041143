@@ -1,41 +1,37 @@
-fn median(a: Vec<f32>) -> Option<f32> {
-    todo!();
+mod run_length_encoding {
+    pub fn encode(text: &str) -> String {
+        todo!()
+    }
+    
+    pub fn decode(text: &str) -> String {
+        todo!()
+    }
 }
 
 fn main() {
-    let answer = median(vec![1.0, 2.0, 5.0]);
-
-    println!("median([1,2,5]) = {:?}", answer);
+    // 
 }
 
 #[test]
-fn empty_list() {
-    let input = vec![];
-    let expected_output = None;
-    let actual_output = median(input);
-    assert_eq!(actual_output, expected_output);
+fn abc() {
+    use run_length_encoding::*;
+
+    assert_eq!(encode("abc"), "1a1b1c");
 }
 
 #[test]
-fn sorted_list() {
-    let input = vec![1.0, 4.0, 5.0];
-    let expected_output = Some(4.0);
-    let actual_output = median(input);
-    assert_eq!(actual_output, expected_output);
+fn round_trip() {
+    use run_length_encoding::*;
+
+    let input = "LinkedIn";
+    println!("{}", encode(input));
+    assert_eq!(decode(&encode(input)), input);
 }
 
 #[test]
-fn even_length() {
-    let input = vec![1.0, 3.0, 5.0, 6.0];
-    let expected_output = Some(4.0);
-    let actual_output = median(input);
-    assert_eq!(actual_output, expected_output);
-}
+fn long_run() {
+    use run_length_encoding::*;
 
-#[test]
-fn unsorted_list() {
-    let input = vec![1.0, 5.0, 2.0];
-    let expected_output = Some(2.0);
-    let actual_output = median(input);
-    assert_eq!(actual_output, expected_output);
+    let input = "AAAAA AAAAAAAAAA AAAAAAAAAAAAAAAAAAAA";
+    assert_eq!(encode(input), "5A1 9A1A1 9A9A2A");
 }

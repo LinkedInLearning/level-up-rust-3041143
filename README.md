@@ -1,23 +1,21 @@
-# Level Up Rust: Challenge 1
+# Level Up Rust: Challenge 14
 
-Your challenge is to implement a function, `median()`, that takes a vector of floating point numbers (`Vec<f32>`) and returns the median as a floating point number.
+Your challenge is to implement [run-length encoding](https://en.wikipedia.org/wiki/Run-length_encoding).
+Design functions `encode()` and `decode()` that takes can encode and decode `&str` (string slices).
 
-Your return value should be wrapped in an `Option` type to account for cases where the input list is empty. When that occurs, there is no meaningful median.
+**Note:** When a run has more than 9 consecutive elements of the same character, you should break the run into two to avoid parsing ambiguities.
 
-## Testing your code
+**Note:** To make the challenge more difficult, modify your `encode()` function to accept arbitrary data streams (`[u8]`), while returning valid `String`. Your `decode()` function should do the inverse. This will require you to introduce an escaping mechanism to enable unprintable bytes to be printed.
 
-To test your solution, use `cargo test`.
+## Testing your solution
+
+Use `cargo test` to evaluate yourself:
 
 ```console
 $ cargo test
 ...
-running 4 tests
-test even_length ... FAILED
-test sorted_list ... FAILED
-test empty_list ... FAILED
-test unsorted_list ... FAILED
-
+running 2 tests
+test abc ... ok
+test round_trip ... ok
 ...
 ```
-
-You've successfully completed the challenge when these tests pass.
