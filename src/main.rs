@@ -1,41 +1,52 @@
-fn median(a: Vec<f32>) -> Option<f32> {
-    todo!();
+mod vigenere {
+    const ALPHABET: [u8; 26] = *b"ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const A: u8 = b'A';
+    const Z: u8 = b'Z';
+    const WRAP: u8 = 26; // ALPHABET.len() as u8
+
+    fn clean_input(input: &str) -> impl Iterator<Item = u8> + '_ {
+        input.bytes().filter_map(|x| match x {
+            A..=Z => Some(x),
+            b'a'..=b'z' => Some(x - (b'a' - A)),
+            _ => None,
+        })
+    }
+
+    pub fn encrypt(plaintext: &str, key: &str) -> String {
+        let mut key_iter = key.bytes().map(|k| k - A).cycle();
+
+        let encrypted = clean_input(plaintext)
+            .map(|x| {
+                let offset = key_iter.next().unwrap();
+                ((x - A) + offset) % WRAP + A
+            })
+            .collect();
+
+        String::from_utf8(encrypted).unwrap()
+    }
+
+    pub fn decrypt(ciphertext: &str, key: &str) -> String {
+        let mut key_iter = key.bytes().map(|k| k - b'A').cycle();
+
+        let ciphertext = clean_input(ciphertext)
+            .map(|x| {
+                let offset = key_iter.next().unwrap();
+                ((x + WRAP - A) - offset) % WRAP + A
+            })
+            .collect();
+
+        String::from_utf8(ciphertext).unwrap()
+    }
 }
 
 fn main() {
-    let answer = median(vec![1.0, 2.0, 5.0]);
+    let key = "WHYRUST";
+    let ciphertext = "
+    PVCDJG
+    PAYCMY
+    JRKUC
+    ";
+    let plaintext = vigenere::decrypt(&ciphertext, key);
 
-    println!("median([1,2,5]) = {:?}", answer);
-}
-
-#[test]
-fn empty_list() {
-    let input = vec![];
-    let expected_output = None;
-    let actual_output = median(input);
-    assert_eq!(actual_output, expected_output);
-}
-
-#[test]
-fn sorted_list() {
-    let input = vec![1.0, 4.0, 5.0];
-    let expected_output = Some(4.0);
-    let actual_output = median(input);
-    assert_eq!(actual_output, expected_output);
-}
-
-#[test]
-fn even_length() {
-    let input = vec![1.0, 3.0, 5.0, 6.0];
-    let expected_output = Some(4.0);
-    let actual_output = median(input);
-    assert_eq!(actual_output, expected_output);
-}
-
-#[test]
-fn unsorted_list() {
-    let input = vec![1.0, 5.0, 2.0];
-    let expected_output = Some(2.0);
-    let actual_output = median(input);
-    assert_eq!(actual_output, expected_output);
+    println!("{}", plaintext);
 }
