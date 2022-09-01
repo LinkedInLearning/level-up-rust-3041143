@@ -1,23 +1,21 @@
-# Level Up Rust: Challenge 1
+# Level Up Rust: Challenge 15
 
-Your challenge is to implement a function, `median()`, that takes a vector of floating point numbers (`Vec<f32>`) and returns the median as a floating point number.
+Your challenge is to create a parser for dates that can accept
+multiple date formats. You'll need to be able to handle different
+delimiters and missing data.
 
-Your return value should be wrapped in an `Option` type to account for cases where the input list is empty. When that occurs, there is no meaningful median.
+## Testing your solution
 
-## Testing your code
-
-To test your solution, use `cargo test`.
+Use `cargo test` to evaluate yourself:
 
 ```console
 $ cargo test
 ...
-running 4 tests
-test even_length ... FAILED
-test sorted_list ... FAILED
-test empty_list ... FAILED
-test unsorted_list ... FAILED
-
+running 5 tests
+test dmy_dot ... ok
+test mdy_dot ... ok
+test invalid ... ok
+test ymd_hyphen ... ok
+test ymd_slash ... ok
 ...
 ```
-
-You've successfully completed the challenge when these tests pass.
