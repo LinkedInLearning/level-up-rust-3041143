@@ -1,41 +1,52 @@
-fn median(a: Vec<f32>) -> Option<f32> {
-    todo!();
+// use time::{Date, Month, Instant, Duration};
+use chrono::{Duration, TimeZone};
+use chrono::{Date, Local};
+
+struct ImportantEvent {
+    what: String,
+    when: Date<Local>,
+}
+
+trait Deadline {
+    fn is_passed(&self) -> bool;
+}
+
+impl Deadline for ImportantEvent {
+    fn is_passed(&self) -> bool {
+        self.when < Local::today()
+    }
 }
 
 fn main() {
-    let answer = median(vec![1.0, 2.0, 5.0]);
-
-    println!("median([1,2,5]) = {:?}", answer);
+    let missed_christmas = ImportantEvent {
+        what: String::from("Christmas"),
+        when: Local.ymd(2020, 12, 25),
+    };
+    
+    if missed_christmas.is_passed() {
+        println!("oh well, maybe next year");
+    } else {
+        println!("☃︎");
+    }
 }
 
 #[test]
-fn empty_list() {
-    let input = vec![];
-    let expected_output = None;
-    let actual_output = median(input);
-    assert_eq!(actual_output, expected_output);
+fn in_past() {
+    let event = ImportantEvent {
+        what: String::from("friend's birthday"),
+        when: Local::today() - Duration::hours(25),
+    };
+
+    assert!(event.is_passed())
 }
 
 #[test]
-fn sorted_list() {
-    let input = vec![1.0, 4.0, 5.0];
-    let expected_output = Some(4.0);
-    let actual_output = median(input);
-    assert_eq!(actual_output, expected_output);
+fn in_future() {
+    let event = ImportantEvent {
+        what: String::from("friend's birthday"),
+        when: Local::today() + Duration::hours(25),
+    };
+
+    assert!(!event.is_passed())
 }
 
-#[test]
-fn even_length() {
-    let input = vec![1.0, 3.0, 5.0, 6.0];
-    let expected_output = Some(4.0);
-    let actual_output = median(input);
-    assert_eq!(actual_output, expected_output);
-}
-
-#[test]
-fn unsorted_list() {
-    let input = vec![1.0, 5.0, 2.0];
-    let expected_output = Some(2.0);
-    let actual_output = median(input);
-    assert_eq!(actual_output, expected_output);
-}
