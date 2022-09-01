@@ -1,8 +1,57 @@
-# Level Up Rust: Challenge 1
+# Rust Code Challenges: Challenge 5
 
-Your challenge is to implement a function, `median()`, that takes a vector of floating point numbers (`Vec<f32>`) and returns the median as a floating point number.
+Your challenge is to implement a trait, `MorseCode` for `String`.
+The `MorseCode` trait contains a method `to_morse_code()` that 
+returns a `Message`.
 
-Your return value should be wrapped in an `Option` type to account for cases where the input list is empty. When that occurs, there is no meaningful median.
+The `Message` type is defined within the sample code. It is a
+type alias for `Vec<Letter>`, where `Letter` represents a single
+character from the Morse code alphabet (A-Z, 0-9).
+
+As a refresher on Morse code, individual characters are made up 
+of short bursts of "pulses", which can either be short (`.`) or 
+long (`_`).
+
+Here are a few characters from the alphabet and their Morse code
+equivalents:
+
+<table>
+  <tr><td>A</td><td><code> _. </code></td></tr>
+  <tr><td>B</td><td><code> _... </code></td></tr>
+  <tr><td>C</td><td><code> _._. </code></td></tr>
+  <tr><td colspan=2>...</td></tr>
+  <tr><td>X</td><td><code> _.._ </code></td></tr>
+  <tr><td>Y</td><td><code> _.__ </code></td></tr>
+  <tr><td>Z</td><td><code> __.. </code></td></tr>
+</table>
+
+To represent pulses in Rust, we'll use an enum:
+
+```rust
+enum Pulse {
+    Short,
+    Long,
+}
+```
+
+Each character in the alphabet (A-Z, 0-9) takes up a variable number
+of pulses to be represented. Letters that occur more frequently in
+English, such as E and A, take fewer letters to be represented. To
+accomodate this, we'll represent a `Letter` as a `Vec<Pulse`>.
+
+```rust
+type Letter = Vec<Pulse>;
+```
+
+With `Letter` defined, we're able to build messages. A `Message` is
+defined as:
+
+```rust
+type Message = Vec<Letter>;
+```
+
+It is a 
+type alias for the `Vec<
 
 ## Testing your code
 
@@ -11,13 +60,4 @@ To test your solution, use `cargo test`.
 ```console
 $ cargo test
 ...
-running 4 tests
-test even_length ... FAILED
-test sorted_list ... FAILED
-test empty_list ... FAILED
-test unsorted_list ... FAILED
-
-...
 ```
-
-You've successfully completed the challenge when these tests pass.
