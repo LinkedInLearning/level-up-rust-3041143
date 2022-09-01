@@ -1,41 +1,54 @@
-fn median(a: Vec<f32>) -> Option<f32> {
+fn info(a: &T) {
     todo!();
 }
 
 fn main() {
-    let answer = median(vec![1.0, 2.0, 5.0]);
+    let a = "?";
+    let b = "?".to_string();
+    info(&a);
+    info(&b);
 
-    println!("median([1,2,5]) = {:?}", answer);
+    // Advanced 1
+    // use std::ffi::CString;
+    
+    // let c = CString::new("?").unwrap();
+    // info(&input);
+
+    // Advanced 2
+    // use std::path::Path;
+    // let d = Path::new("/tmp/linkedin-learning");
+    // info(d);
+}
+
+
+#[test]
+fn str() {
+    let input = "Rust";
+    info(&input);
 }
 
 #[test]
-fn empty_list() {
-    let input = vec![];
-    let expected_output = None;
-    let actual_output = median(input);
-    assert_eq!(actual_output, expected_output);
+fn string() {
+    let input = String::from("Rust");
+    info(&input);
 }
 
-#[test]
-fn sorted_list() {
-    let input = vec![1.0, 4.0, 5.0];
-    let expected_output = Some(4.0);
-    let actual_output = median(input);
-    assert_eq!(actual_output, expected_output);
-}
+// #[test]
+// fn chars() {
+//     let input = 'r';
+//     info(&input);
+// }
 
-#[test]
-fn even_length() {
-    let input = vec![1.0, 3.0, 5.0, 6.0];
-    let expected_output = Some(4.0);
-    let actual_output = median(input);
-    assert_eq!(actual_output, expected_output);
-}
+// #[test]
+// fn cstring() {
+//     use std::ffi::{CString};
+//     let input = CString::new("Rust").unwrap();
+//     info(&input);
+// }
 
-#[test]
-fn unsorted_list() {
-    let input = vec![1.0, 5.0, 2.0];
-    let expected_output = Some(2.0);
-    let actual_output = median(input);
-    assert_eq!(actual_output, expected_output);
-}
+// #[test]
+// fn path() {
+//     use std::path::Path;
+//     let input = Path::new("/tmp/rust");
+//     info(input);
+// }
