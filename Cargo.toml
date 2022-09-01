@@ -1,4 +1,6 @@
 [package]
-authors = ["Tim McNamara <tim@mcnamara.nz>"]
-name = "hello_rust_learners"
-version = "0.1.0"
+name = "rust-code-challenge-1"
+version = "0.0.0"
+edition = "2018"
+
+[dependencies]
