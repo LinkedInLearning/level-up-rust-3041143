@@ -1,8 +1,16 @@
-# Level Up Rust: Challenge 1
+# Level Up Rust: Challenge 6
 
-Your challenge is to implement a function, `median()`, that takes a vector of floating point numbers (`Vec<f32>`) and returns the median as a floating point number.
+Your challenge is to implement code that calculates the
+value of a hand of cards for the game of blackjack.
 
-Your return value should be wrapped in an `Option` type to account for cases where the input list is empty. When that occurs, there is no meaningful median.
+Cards have the following values:
+
+- Cards **2** to **9** have a value equal to their number
+- Face cards (the **King**, **Queen** and **Jack** have a value of 10
+- The **Ace** has a value of 11, unless the total value of
+  the hand exceeds 21. If that happens, the card's value is 1.
+- Suits are not significant
+- There are no other cards, such as Jokers, to consider
 
 ## Testing your code
 
@@ -11,13 +19,4 @@ To test your solution, use `cargo test`.
 ```console
 $ cargo test
 ...
-running 4 tests
-test even_length ... FAILED
-test sorted_list ... FAILED
-test empty_list ... FAILED
-test unsorted_list ... FAILED
-
-...
 ```
-
-You've successfully completed the challenge when these tests pass.

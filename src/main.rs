@@ -1,41 +1,86 @@
-fn median(a: Vec<f32>) -> Option<f32> {
-    todo!();
+#![allow(dead_code)]
+
+#[derive(Debug, PartialEq)]
+enum Card {
+    Ace,
+    Two,
+    Three,
+    Four,
+    Five,
+    Six,
+    Seven,
+    Eight,
+    Nine,
+    Jack,
+    Queen,
+    King,
+}
+
+struct Hand {
+    cards: Vec<Card>,
+}
+
+impl Hand {
+    fn new() -> Self {
+        Hand {
+            cards: vec![],
+        }
+    }
+
+    fn add(&mut self, card: Card) {
+        self.cards.push(card);
+    }
+
+    fn value(&self) -> usize {
+        // TODO: implement this method
+        0 
+    }
+
+    fn is_loosing_hand(&self) -> bool {
+        self.value() > 21
+    }
 }
 
 fn main() {
-    let answer = median(vec![1.0, 2.0, 5.0]);
+    let mut hand = Hand::new();
+    hand.add(Card::King);
+    hand.add(Card::Ace);
+}
 
-    println!("median([1,2,5]) = {:?}", answer);
+
+#[test]
+fn empty_hand() {
+    let hand = Hand::new();
+
+    assert_eq!(hand.value(), 0);
 }
 
 #[test]
-fn empty_list() {
-    let input = vec![];
-    let expected_output = None;
-    let actual_output = median(input);
-    assert_eq!(actual_output, expected_output);
+fn strong_hand() {
+    let mut hand = Hand::new();
+    hand.add(Card::Queen);
+    hand.add(Card::Ace);
+
+    assert_eq!(hand.value(), 21);
 }
 
 #[test]
-fn sorted_list() {
-    let input = vec![1.0, 4.0, 5.0];
-    let expected_output = Some(4.0);
-    let actual_output = median(input);
-    assert_eq!(actual_output, expected_output);
+fn risky_hand() {
+    let mut hand = Hand::new();
+    hand.add(Card::King);
+    hand.add(Card::Queen);
+    hand.add(Card::Ace);
+    
+    assert_eq!(hand.value(), 21);
 }
 
 #[test]
-fn even_length() {
-    let input = vec![1.0, 3.0, 5.0, 6.0];
-    let expected_output = Some(4.0);
-    let actual_output = median(input);
-    assert_eq!(actual_output, expected_output);
-}
-
-#[test]
-fn unsorted_list() {
-    let input = vec![1.0, 5.0, 2.0];
-    let expected_output = Some(2.0);
-    let actual_output = median(input);
-    assert_eq!(actual_output, expected_output);
+fn oops() {
+    let mut hand = Hand::new();
+    hand.add(Card::King);
+    hand.add(Card::Seven);
+    hand.add(Card::Five);
+    
+    assert!(hand.is_loosing_hand());
+    assert_eq!(hand.value(), 22);
 }
