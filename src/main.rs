@@ -1,41 +1,49 @@
-fn median(a: Vec<f32>) -> Option<f32> {
+use chrono::NaiveDate;
+
+/// Parses a string that represents a date. When a date
+/// is unable to be determined, return `None`. 
+fn flexible_date_parse(text: &str) -> Option<NaiveDate> {
     todo!();
 }
 
 fn main() {
-    let answer = median(vec![1.0, 2.0, 5.0]);
+    let dates = [
+        "2010-12-11",
+        "1999/Mar/02",
+        "01.Mar.2021",
+        "Mar.05.2021",
+        "not a date",
+    ];
 
-    println!("median([1,2,5]) = {:?}", answer);
+    for d in dates.iter() {
+        println!("{} -> {:?}", d, flexible_date_parse(d));
+    }
+
 }
 
 #[test]
-fn empty_list() {
-    let input = vec![];
-    let expected_output = None;
-    let actual_output = median(input);
-    assert_eq!(actual_output, expected_output);
+fn ymd_hyphen() {
+    assert_eq!(flexible_date_parse("2010-12-11"), Some(NaiveDate::from_ymd(2010, 12, 11)))
 }
 
 #[test]
-fn sorted_list() {
-    let input = vec![1.0, 4.0, 5.0];
-    let expected_output = Some(4.0);
-    let actual_output = median(input);
-    assert_eq!(actual_output, expected_output);
+fn ymd_slash() {
+    assert_eq!(flexible_date_parse("1999/Mar/02"), Some(NaiveDate::from_ymd(1999, 3, 2)))
 }
 
 #[test]
-fn even_length() {
-    let input = vec![1.0, 3.0, 5.0, 6.0];
-    let expected_output = Some(4.0);
-    let actual_output = median(input);
-    assert_eq!(actual_output, expected_output);
+fn dmy_dot() {
+    assert_eq!(flexible_date_parse("01.Mar.2021"), Some(NaiveDate::from_ymd(2021, 3, 1)))
 }
 
 #[test]
-fn unsorted_list() {
-    let input = vec![1.0, 5.0, 2.0];
-    let expected_output = Some(2.0);
-    let actual_output = median(input);
-    assert_eq!(actual_output, expected_output);
+fn mdy_dot() {
+    assert_eq!(flexible_date_parse("Apr.05.2021"), Some(NaiveDate::from_ymd(2021, 4, 5)))
 }
+
+#[test]
+fn invalid() {
+    assert_eq!(flexible_date_parse("not a date"), None)
+}
+
+
