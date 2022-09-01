@@ -1,12 +1,5 @@
 fn unique(a: Vec<i32>) -> Vec<i32> {
-    let mut tmp = Vec::with_capacity(a.len());
-    for elem in a {
-        if tmp.contains(&elem) {
-            continue;
-        }
-        tmp.push(elem);
-    }
-    tmp
+    todo!()
 }
 
 // advanced 1: use generic types
