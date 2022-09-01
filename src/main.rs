@@ -1,41 +1,57 @@
-fn median(a: Vec<f32>) -> Option<f32> {
-    todo!();
+use std::collections::{HashMap, HashSet};
+
+type Node = usize;
+type Cost = usize;
+
+struct Graph {
+    edges: HashMap<Node, Vec<(Node, Cost)>>,
+    nodes: HashSet<Node>,
+}
+
+impl Graph {
+    fn from_edge_list(edge_list: &Vec<(Node, Node, Cost)>) -> Self {
+        let mut adjacency_list: HashMap<Node, Vec<(Node, Cost)>> = HashMap::new();
+        let mut nodes = HashSet::new();
+
+        for &(source, destination, cost) in edge_list.iter() {
+            let destinations = adjacency_list
+                .entry(source)
+                .or_insert_with(|| Vec::new());
+
+            destinations.push((destination, cost));
+
+            nodes.insert(source);
+            nodes.insert(destination);
+        }
+
+        Graph {
+            edges: adjacency_list,
+            nodes,
+        }
+    }
+}
+
+
+fn shortest_path(g: &Graph, start: Node, goal: Node) -> Option<(Vec<Node>, Cost)> {
+    todo!()
 }
 
 fn main() {
-    let answer = median(vec![1.0, 2.0, 5.0]);
+    let edge_list = include!("large_graph.in");
+    let g = Graph::from_edge_list(&edge_list);
 
-    println!("median([1,2,5]) = {:?}", answer);
+    if let Some((path, cost)) = shortest_path(
+            &g, 1000, 9000) {
+        println!("1000->9000, {:?} {}", path, cost);
+    };
 }
 
 #[test]
-fn empty_list() {
-    let input = vec![];
-    let expected_output = None;
-    let actual_output = median(input);
-    assert_eq!(actual_output, expected_output);
-}
+fn large_graph() {
+    let edge_list = include!("large_graph.in");
+    let g = Graph::from_edge_list(&edge_list);
 
-#[test]
-fn sorted_list() {
-    let input = vec![1.0, 4.0, 5.0];
-    let expected_output = Some(4.0);
-    let actual_output = median(input);
-    assert_eq!(actual_output, expected_output);
-}
-
-#[test]
-fn even_length() {
-    let input = vec![1.0, 3.0, 5.0, 6.0];
-    let expected_output = Some(4.0);
-    let actual_output = median(input);
-    assert_eq!(actual_output, expected_output);
-}
-
-#[test]
-fn unsorted_list() {
-    let input = vec![1.0, 5.0, 2.0];
-    let expected_output = Some(2.0);
-    let actual_output = median(input);
-    assert_eq!(actual_output, expected_output);
+    let path = shortest_path(&g, 1000, 9000);
+    assert!(path.is_some());
+    assert_eq!(path.unwrap().1, 24); 
 }
