@@ -1,23 +1,13 @@
-# Level Up Rust: Challenge 1
+# Level Up Rust: Challenge 11
 
-Your challenge is to implement a function, `median()`, that takes a vector of floating point numbers (`Vec<f32>`) and returns the median as a floating point number.
+Your challenge is to implement a code that
+can parse and validate an ISBN-13 number.
 
-Your return value should be wrapped in an `Option` type to account for cases where the input list is empty. When that occurs, there is no meaningful median.
+## Testing your solution
 
-## Testing your code
-
-To test your solution, use `cargo test`.
+Use `cargo test` to evaluate yourself:
 
 ```console
 $ cargo test
 ...
-running 4 tests
-test even_length ... FAILED
-test sorted_list ... FAILED
-test empty_list ... FAILED
-test unsorted_list ... FAILED
-
-...
 ```
-
-You've successfully completed the challenge when these tests pass.
