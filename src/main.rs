@@ -55,8 +55,18 @@ fn hello_world() {
         vec![Short, Long, Short, Short],
         vec![Long, Short, Short],
     ];
+    
+    let source = "Hello, world";
+    let actual = source.to_string().to_morse_code();
 
-    let actual = "Hello, world".to_string().to_morse_code();
+    for i in 0..source.len() {
+        if expected[i] == actual[i] {
+            continue;
+        }
+
+        println!("{}", source.chars().nth(i).unwrap());
+        assert_eq!(expected[i], actual[i]);
+    }
     assert_eq!(actual, expected);
 }
 
@@ -64,6 +74,8 @@ fn hello_world() {
 fn whole_alphabet() {
     let alphabet = "abcdefghijklmnopqrstuvwxyz1234567890".to_string();
 
-    alphabet.to_morse_code();
-    alphabet.to_uppercase().to_morse_code();
+    let lower = alphabet.to_morse_code();
+    let upper = alphabet.to_uppercase().to_morse_code();
+
+    assert_eq!(lower, upper)
 }
