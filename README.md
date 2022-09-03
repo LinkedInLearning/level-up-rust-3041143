@@ -1,4 +1,4 @@
-# Rust Code Challenges: Challenge 5
+# Level Up Rust: Challenge 5
 
 Your challenge is to implement a trait, `MorseCode` for `String`.
 The `MorseCode` trait contains a method `to_morse_code()` that 
