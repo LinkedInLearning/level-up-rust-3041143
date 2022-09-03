@@ -34,7 +34,7 @@ enum Pulse {
 }
 ```
 
-Each character in the alphabet (A-Z, 0-9) takes up a variable number
+Each character in the Latin alphabet (A-Z, 0-9) takes up a variable number
 of pulses to be represented. Letters that occur more frequently in
 English, such as E and A, take fewer letters to be represented. To
 accomodate this, we'll represent a `Letter` as a `Vec<Pulse`>.
@@ -44,14 +44,11 @@ type Letter = Vec<Pulse>;
 ```
 
 With `Letter` defined, we're able to build messages. A `Message` is
-defined as:
+defined as as a type alias:
 
 ```rust
 type Message = Vec<Letter>;
 ```
-
-It is a 
-type alias for the `Vec<
 
 ## Testing your code
 
