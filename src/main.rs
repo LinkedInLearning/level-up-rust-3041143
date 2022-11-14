@@ -1,6 +1,6 @@
 mod vigenere {
     pub fn encrypt(plaintext: &str, key: &str) -> String {
-        String::new() // Optional
+        String::new()
     }
 
     pub fn decrypt(ciphertext: &str, key: &str) -> String {
