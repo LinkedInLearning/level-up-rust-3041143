@@ -1,32 +1,27 @@
-fn sum(numbers: Vec<Option<i32>>) -> i32 {
+fn weeks_between(a: &str, b: &str) -> i32 {
     todo!()
 }
 
 fn main() {
-    println!("");
-}
+    let n_weeks = weeks_between("2010-01-21", "2010-10-21");
 
-
-#[test]
-fn empty() {
-    let nn = vec![];
-    assert_eq!(sum(nn), 0);
+    println!("hello: {}", n_weeks);
 }
 
 #[test]
-fn no_missing() {
-    let nn = vec![Some(1), Some(5), Some(4)];
-    assert_eq!(sum(nn), 10);
+fn same_day() {
+    let n_weeks = weeks_between("1010-10-10", "1010-10-10");
+    assert_eq!(n_weeks, 0);
 }
 
 #[test]
-fn some_missing() {
-    let nn = vec![None, Some(1), Some(5), Some(4), None, None];
-    assert_eq!(sum(nn), 10);
+fn one_week() {
+    let n_weeks = weeks_between("1010-10-10", "1010-10-18");
+    assert_eq!(n_weeks, 1);
 }
 
 #[test]
-fn all_missing() {
-    let nn = vec![None, None, None];
-    assert_eq!(sum(nn), 0);
+fn past() {
+    let n_weeks = weeks_between("1010-10-18", "1010-10-10");
+    assert_eq!(n_weeks, -1);
 }
