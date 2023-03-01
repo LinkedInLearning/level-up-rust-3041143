@@ -1,10 +1,16 @@
-# LEVEL UP RUST
+# Level Up: Rust
+This is the repository for the LinkedIn Learning course Level Up: Rust. The full course is available from [LinkedIn Learning][lil-course-url].
 
-This is the repository for the LinkedIn Learning course `level-up-rust`. The full course is available from [LinkedIn Learning][lil-course-url].
+![Level Up: Rust][lil-thumbnail-url] 
 
-![course-name-alt-text][lil-thumbnail-url] 
+It’ll take time—and a whole lot of practice—to improve your Rust coding skills. It’s important to push yourself with new challenges, which is exactly what this course is for. Join author and instructor Tim McNamara as he takes you through a series of coding challenges, testing your ability to perform certain functions so you can reach the next level with Rust. Acquire new Rust skills with exercises that start off simple and become progressively more difficult. Learn how to write better, faster, and more reliable code when you need it. Find out why Rust is taking over the industry, offering an efficient and secure alternative to many other programming languages.
 
-_See the readme file in the main branch for updated instructions and information._
+This course is integrated with GitHub Codespaces, an instant cloud developer environment that offers all the functionality of your favorite IDE without the need for any local machine setup. With GitHub Codespaces, you can get hands-on practice from any machine, at any time—all while using a tool that you’ll likely encounter in the workplace.
+
+Each installment of the Level Up series offers at least 15 bite-sized opportunities to practice programming at various levels of difficulty, so you can challenge yourself and reinforce what you’ve learned. Check out the “Using GitHub Codespaces with this course” video to learn how to get a codespace up and running.
+
+
+
 ## Instructions
 This repository has branches for each of the videos in the course. You can use the branch pop up menu in github to switch to a specific branch and take a look at the course at that stage, or you can add `/tree/BRANCH_NAME` to the URL to go to the branch you want to access.
 
@@ -30,8 +36,15 @@ To resolve this issue:
 3. [Course-specific instructions]
 
 
-[0]: # (Replace these placeholder URLs with actual course URLs)
+### Instructor
 
-[lil-course-url]: https://www.linkedin.com/learning/
-[lil-thumbnail-url]: http://
+Tim McNamara 
+                            
+Author, Software Architect
 
+                            
+
+Check out my other courses on [LinkedIn Learning](https://www.linkedin.com/learning/instructors/tim-mcnamara).
+
+[lil-course-url]: https://www.linkedin.com/learning/level-up-rust?dApp=59033956
+[lil-thumbnail-url]: https://media.licdn.com/dms/image/C560DAQEOULbtwwYf8Q/learning-public-crop_288_512/0/1677009134347?e=2147483647&v=beta&t=upv4qh8qFO7ZR9gBPQGQQW8wg9gyTjKoaDC4gD0OwxU
