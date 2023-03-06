@@ -11,6 +11,7 @@ enum Card {
     Seven,
     Eight,
     Nine,
+    Ten,
     Jack,
     Queen,
     King,
@@ -77,7 +78,7 @@ fn risky_hand() {
 #[test]
 fn oops() {
     let mut hand = Hand::new();
-    hand.add(Card::King);
+    hand.add(Card::Ten);
     hand.add(Card::Seven);
     hand.add(Card::Five);
     
